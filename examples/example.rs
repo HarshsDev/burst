@@ -8,10 +8,14 @@ async fn main() {
     b.add_set(
         String::from("server"),
         1,
-        MachineSetup::new("c5.large".to_string(), "ami-0c42e4a489a8f18ea".to_string(), |ssh| {
-            Ok(())
-            // ssh.exec("sudo yum install htop")
-        }),
+        MachineSetup::new(
+            "t3.micro".to_string(),
+            "ami-0b46816ffa1234887".to_string(),
+            |ssh| {
+                Ok(())
+                // ssh.exec("sudo yum install htop")
+            },
+        ),
     );
 
     // b.add_set(
