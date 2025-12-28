@@ -27,15 +27,23 @@ async fn main() {
     //     }),
     // );
 
-    b.run(|vms: HashMap<String, &mut [Machine]>| {
-        // let server_ip = vms["server"][0].ip;
-        // let cmd = format!("ping{}",server_ip);
-        // vms["client"].for_each_parallel(|client| {
+    match b
+        .run(|vms: HashMap<String, &mut [Machine]>| {
+            // let server_ip = vms["server"][0].ip;
+            // let cmd = format!("ping{}",server_ip);
+            // vms["client"].for_each_parallel(|client| {
 
-        //     client.exec(cmd);
-        // })
-        Ok(())
-    })
-    .await
-    .expect_err("Failed to run burst");
+            //     client.exec(cmd);
+            // })
+            Ok(())
+        })
+        .await
+    {
+        Ok(spot_ids) => {
+            println!("Burst succeeded: {:?}", spot_ids);
+        }
+        Err(e) => {
+            eprintln!("Burst failed: {}", e);
+        }
+    }
 }
